@@ -6,8 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
 
@@ -39,7 +42,7 @@ public  class AbstactData implements IData {
 
 		  try {
 
-			 connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","postgres", "marjan007");
+			 connection = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
 			  
 			  
 		  } catch (SQLException e) {
@@ -70,7 +73,7 @@ public  class AbstactData implements IData {
 	public double[] getStorageDiscretisation() throws Exception {
 		try {
 			
-			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","postgres", "marjan007");
+			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -118,7 +121,7 @@ public  class AbstactData implements IData {
 	public double[] getInflow() throws Exception {
 		try {
 			
-			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","postgres", "marjan007");
+			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -163,7 +166,7 @@ public  class AbstactData implements IData {
 	public double[] getstorageTargetsFloods() throws Exception {
 		try {
 			
-			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","postgres", "marjan007");
+			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -207,7 +210,7 @@ public  class AbstactData implements IData {
 	public double[] getstorageTargetsFloodWeights() throws Exception {
 		try {
 			
-			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","postgres", "marjan007");
+			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -255,7 +258,7 @@ public  class AbstactData implements IData {
 	public double[] getstorageTargetsRecreation() throws Exception {
 		try {
 			
-			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","postgres", "marjan007");
+			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -299,7 +302,7 @@ public  class AbstactData implements IData {
 	public double[] getstorageTargetsRecreationWeights() throws Exception {
 		try {
 			
-			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","postgres", "marjan007");
+			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -343,7 +346,7 @@ public  class AbstactData implements IData {
 	public double[] getreleaseTargets() throws Exception {
 		try {
 		
-			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","postgres", "marjan007");
+			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -385,7 +388,7 @@ public  class AbstactData implements IData {
 	public double[] getreleaseTargetsWeights() throws Exception {
 		try {
 		
-			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","postgres", "marjan007");
+			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -430,7 +433,7 @@ public  class AbstactData implements IData {
 	public void  putStorageOptimal( double [] Optimal, int fD ) throws Exception{
 		try {
 		
-			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","postgres", "marjan007");
+			connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
 
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
@@ -501,7 +504,7 @@ public  class AbstactData implements IData {
     		// This will load the MySQL driver, each DB has its own driver
     		//Class.forName("com.mysql.jdbc.Driver");
     		// Setup the connection with the DB
-    		connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","postgres", "marjan007");
+    		connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
 
     		// Statements allow to issue SQL queries to the database
     		// PreparedStatements can use variables and are more efficient
@@ -589,6 +592,182 @@ public  class AbstactData implements IData {
 */
 
 
+
+
+	
+	
+	
+	/* NOVI FUNKCII ZA VRAKANJE NA PODATOCI OD POSTGRESQL BAZA */
+
+	
+	public int getSections(int k) throws SQLException
+	{
+		int sections=0;
+	    int s;
+		String rowcountquery;
+		connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
+
+		// Statements allow to issue SQL queries to the database
+		statement = connect.createStatement();
+		// Result set get the result of the SQL query
+		
+	 
+		
+	
+		
+		/*
+		 * the three line bellow are for row count to know how many discretisation states are there
+		 * this is done to initialize the storagediscretization vector
+		 */
+		rowcountquery="SELECT sections FROM public.flow_table WHERE id ="+"'" +  k  + "'";
+					
+	
+		
+		resultSet=statement.executeQuery(rowcountquery);
+		resultSet.next();
+		
+		s=resultSet.getInt("sections");
+	
+		return s;
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public double[] getArray(int k) throws SQLException
+	{    
+		
+		String rowcountquery;
+		
+		connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
+
+		// Statements allow to issue SQL queries to the database
+		statement = connect.createStatement();
+		// Result set get the result of the SQL query
+		
+	 
+		
+	
+		
+		/*
+		 * the three line bellow are for row count to know how many discretisation states are there
+		 * this is done to initialize the storagediscretization vector
+		 */
+		rowcountquery="SELECT data_array FROM public.flow_table WHERE id ="+"'" +  k  + "'";
+					
+	    
+		
+		resultSet=statement.executeQuery(rowcountquery);
+		
+		resultSet.next();
+		
+		String z = resultSet.getString("data_array");
+		     
+		
+		String wtbracket=z.substring(1, z.length()-1);
+		     
+		List<String> items = Arrays.asList(wtbracket.split("\\s*,\\s*"));
+		     
+		     
+		        
+		ArrayList<Double> ds = new ArrayList<Double>();
+		// fill ds with Doubles
+		
+		for (String d : items) {
+		    // Apply formatting to the string if necessary
+		    ds.add(Double.parseDouble(d));
+		}
+		
+		
+				double y[] = new double[ds.size()];
+				for (int i=0; i<ds.size(); i++)
+				{
+				    y[i] = (double)ds.get(i);
+				}
+		
+		
+		
+		return y;
+		
+	}
+	
+	
+	
+	public int getEpisodes(int m) throws SQLException
+	{
+		
+	    int s;
+		String rowcountquery;
+		connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
+
+		// Statements allow to issue SQL queries to the database
+		statement = connect.createStatement();
+		// Result set get the result of the SQL query
+		
+
+	
+		
+		/*
+		 * the three line bellow are for row count to know how many discretisation states are there
+		 * this is done to initialize the storagediscretization vector
+		 */
+		rowcountquery="SELECT episodes FROM public.flow_table WHERE id ="+"'" +  m  + "'";
+					
+	
+		
+		resultSet=statement.executeQuery(rowcountquery);
+		resultSet.next();
+		
+		s=resultSet.getInt("episodes");
+	
+		return s;
+		
+		
+		
+	}
+	
+	
+	
+	public int getTimeSteps(int m) throws SQLException
+	{
+		
+	    int s;
+		String rowcountquery;
+		connect = DriverManager.getConnection("jdbc:postgresql://127.0.0.1:5432/HMak","link", "link231");
+
+		// Statements allow to issue SQL queries to the database
+		statement = connect.createStatement();
+		// Result set get the result of the SQL query
+		
+	 
+		
+	
+		
+		/*
+		 * the three line bellow are for row count to know how many discretisation states are there
+		 * this is done to initialize the storagediscretization vector
+		 */
+		rowcountquery="SELECT timesteps FROM public.flow_table WHERE id ="+"'" +  m  + "'";
+					
+	
+		
+		resultSet=statement.executeQuery(rowcountquery);
+		resultSet.next();
+		
+		s=resultSet.getInt("timesteps");
+	
+		return s;
+		
+		
+		
+	}
 
 
 	
