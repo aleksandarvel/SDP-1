@@ -1,5 +1,8 @@
 package SDP;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+
 import Data.AbstactData;
 import Data.IData;
 import Matrix.*;
@@ -117,18 +120,46 @@ public class transitionMatrices {
 			
 		}	
 		
-		
-		THE INFORMATION BELOW WILL BE READED FROM THE DATABASE
+	THE INFORMATION BELOW WILL BE READED FROM THE DATABASE
 		*/
 
-	double [] inlowRaw={1,2,3,4,5,2,3,4,2,1,2,3,2,4,5,3,6,4,2,2};
-	int episodes = 6;
-	int sections=2;
-	int timesteps = 3;
-	this.timestep=timesteps;
+		
+		AbstactData test = new AbstactData();
+		 int l,m;
+		 int k=0;
+		l=test.testDatabaseConnection();
+		
+	AbstactData test1 = new AbstactData();
+		
+	InputStreamReader converter = new InputStreamReader(System.in);
+	        BufferedReader in = new BufferedReader(converter);
+	        System.out.println("----------------------------------------------------------------");
+	        System.out.println("Insert flow ID:");
+	        System.out.println("----------------------------------------------------------------");
+		String id;
+       id= in.readLine();
+       
+       
+	try {
+    	  
+    	    k=Integer.parseInt(id);
+
+       } catch (NumberFormatException e) {
+          System.exit(0);
+       }
+       
+      
+       
+	double [] inlowRaw=test1.getArray(k);
+	int episodes = test1.getEpisodes(k);
+	
+	 
+	this.timestep=test1.getTimeSteps(k);
 	this.inlowRaw=inlowRaw;
 	this.episodes=episodes;
-	this.sections=sections;
+
+	this.sections=test1.getSections(k);
+	
 }
 
 	
