@@ -15,7 +15,8 @@ public class executeSDP {
 	 */
 	public static void main(String[] args) throws Exception {
 		// TODO Auto-generated method stub
-		//nov promena !!123123
+		//nov promena !!123123 2345 234 
+		//234
 
 		
 		
